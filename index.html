@@ -1,0 +1,32 @@
+<html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.3/js/tether.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    </head>
+    <body ng-app="myApp">
+    <script type="text/javascript" src="public/bundle.js" charset="utf-8"></script>
+
+    <div class="container">
+      <form name="myForm" ng-submit="ctrl.submit()" novalidate>
+        <div class="row">
+          <div class="col-md-6">
+            <meal-details></meal-details>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <customer-charges></customer-charges>
+            </div>
+            <div class="row">
+              <earnings-info></earnings-info>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+    <script type="text/javascript" src="public/js/controller/main.js"></script>
+    </body>
+</html>
