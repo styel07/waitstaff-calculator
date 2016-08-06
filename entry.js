@@ -1,7 +1,8 @@
-require("./css/style.css");
+require('./css/style.css');
+// require('!!script!jquery/dist/jquery.min.js');
+// window.jQuery = window.$ =  require('jquery/dist/jquery.min');
 
-// $script("https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.3/js/tether.min.js");
-// $script("https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js");
+require('./node_modules/bootstrap/dist/css/bootstrap.min.css');
 
 require('./node_modules/angular/angular.min.js');
 require('./public/js/controller/main.js');

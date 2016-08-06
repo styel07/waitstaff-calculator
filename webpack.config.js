@@ -10,7 +10,8 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.css$/, loader: "style!css" }
+      { test: /\.css$/, loader: "style!css" },
+      { test: /\.(woff|woff2|eot|svg|ttf)/, loader: "url" }
     ]
   }
 };
