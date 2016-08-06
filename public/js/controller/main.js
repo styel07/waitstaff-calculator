@@ -1,9 +1,21 @@
 var mealDetails = {
   controller: function() {
     this.greet = "This is the meal Details";
-    this.haloo = function() {
-      alert('sawp brah');
+    this.price = "9";
+    this.tax = "4";
+    this.tip = "2";
+
+    var ctrl = this;
+
+    this.submit = function() {
+      alert('submit');
     };
+
+    this.cancel = function() {
+      ctrl.price = "";
+      ctrl.tax = "";
+      ctrl.tip = "";
+    }
   },
   templateUrl:
   './public/view/meal-details.html'
@@ -17,7 +29,7 @@ var customerCharges = {
   './public/view/customer-charges.html'
 };
 
-var earningInfo = {
+var earningsInfo = {
   controller: function() {
     this.greet = "EARNING INFO BRAH!";
   },
@@ -29,4 +41,4 @@ angular
 .module('myApp',[])
 .component('mealDetails', mealDetails)
 .component('customerCharges', customerCharges)
-.component('earningInfo', earningInfo);
+.component('earningsInfo', earningsInfo);

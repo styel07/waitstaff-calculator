@@ -1,18 +1,25 @@
-<div class="row">
-  <div class="row">
-    Base Meal Price: $ <input type="text" name="price" placeholder="Price">
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{$ctrl.greet}}</h3>
   </div>
-  <div class="row">
-    Tax Rate: % <input type="text" name="tax" placeholder="Tax Rate">
-  </div>
-  <div class="row">
-    Tip Percentage: % <input type="text" name="tip" placeholder="Tip Percentage">
-  </div>
-  <div class="row">
-    <button type="button" name="btn-submit" ng-click="$ctrl.haloo()">Submit</button>
-    <button type="button" name="btn-cancel">Cancel</button>
+  <div class="panel-body">
+    <div class="row">
+    <div class="col-md-6 text-right">
+      Base Meal Price: $
+    </div>
+    <div class="col-md-6 text-left">
+      <input type="number" name="price" ng-model="$ctrl.price" placeholder="Price">
+    </div>
+    </div>
+    <div class="row">
+      Tax Rate: % <input type="number" name="tax" ng-model="$ctrl.tax" placeholder="Tax Rate">
+    </div>
+    <div class="row">
+      Tip Percentage: % <input type="number" name="tip" ng-model="$ctrl.tip" placeholder="Tip Percentage">
+    </div>
+    <div class="row">
+      <button type="button" name="btn-submit" ng-click="$ctrl.submit()">Submit</button>
+      <button type="button" name="btn-cancel" ng-click="$ctrl.cancel()">Cancel</button>
+    </div>
   </div>
 </div>
-
-<hr>
-{{$ctrl.greet}}
