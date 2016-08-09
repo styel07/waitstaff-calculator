@@ -1,7 +1,7 @@
 const statefulComponent= {
   template: `
     <div>
-      <stateless-component user='$ctrl.myUser'>
+      <stateless-component user='$ctrl.user'>
       </stateless-component>
     </div>
   `,
@@ -25,9 +25,9 @@ const statelessComponent = {
   `,
   controller() {
     this.stuff = [1,2,3,4];
+    console.log(this);
   }
 };
-
 angular
   .module()
   .component('statefulComponent', statefulComponent)

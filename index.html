@@ -12,16 +12,16 @@
       <div class="row">
         <h1 class="text-center">WaitStaff Calculator</h1>
       </div>
-      <form name="myForm" ng-submit="ctrl.submit()" novalidate>
+      <form name="myForm" ng-submit="$ctrl.submit()" novalidate>
         <!-- <div class=""> -->
           <div class="col-md-offset-1 col-md-4">
             <div class="row text-center">
-              <meal-details mealInfo="$ctrl.mealInfo"></meal-details>
+              <meal-details></meal-details>
             </div>
           </div>
           <div class="col-md-offset-1 col-md-4">
             <div class="row text-center">
-              <customer-charges></customer-charges>
+              <customer-charges mealInfo="$ctrl.mealInfo"></customer-charges>
             </div>
             <div class="row text-center">
               <earnings-info></earnings-info>

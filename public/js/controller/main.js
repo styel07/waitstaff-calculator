@@ -1,6 +1,6 @@
 var mealDetails = {
   controller: function() {
-    this.mealInfo = {};
+    this.mealInfo = { price: 9, tax: 2, tip:8 };
     this.greet = "Enter the Meal Details";
     this.price = 9;
     this.tax = 4;
@@ -28,15 +28,16 @@ var mealDetails = {
 
 var customerCharges = {
   bindings: {
-    customerMealInfo: '<mealInfo'
+    mealInfo: '<'
   },
   controller: function() {
-    console.log(this.customerMealInfo);
+
+    console.log('this',this.mealInfo);
+
     this.greet = "Cusotomer Charges";
     this.tip = 0;
     this.mealCount = 0;
     this.averageTip = 0;
-    // this.customerMealInfo = customerMealInfo;
   },
   templateUrl:
   './public/view/customer-charges.html'
