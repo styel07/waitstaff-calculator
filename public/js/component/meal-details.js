@@ -3,7 +3,7 @@ const mealDetails = {
     onSubmit: '&' //output
   },
   controller: function() {
-    this.mealInfo = { price: 9, tax: 2, tip:8 };
+    this.mealInfo = {};
     this.greet = "Enter the Meal Details";
     this.price = 9;
     this.tax = 4;
@@ -15,14 +15,15 @@ const mealDetails = {
       ctrl.mealInfo = {
         price: price,
         tax: tax,
-        tip: tip
+        tip: tip / 100
       };
       console.log('from submit: ',ctrl.mealInfo);
+      this.onSubmit({
+        mealInfo: this.mealInfo
+      });
+      console.log('new submit: ',ctrl.mealInfo);
     };
 
-    this.onSubmit({
-      mealInfo: ctrl.mealInfo
-    });
 
     this.cancel = function() {
       ctrl.price = "";
@@ -52,7 +53,7 @@ const mealDetails = {
         Tip Percentage: % <input type="number" name="tip" ng-model="$ctrl.tip" placeholder="Tip Percentage">
       </div>
       <div class="row">
-        <button type="button" name="btn-submit" ng-click="$ctrl.submit($ctrl.price ,$ctrl.tax, $ctrl.tip)">Submit</button>
+        <button type="button" name="btn-submit" ng-click="$ctrl.submit($ctrl.price, $ctrl.tax, $ctrl.tip)">Submit</button>
         <button type="button" name="btn-cancel" ng-click="$ctrl.cancel()">Cancel</button>
       </div>
     </div>
