@@ -3,12 +3,13 @@ const customerCharges = {
     mealInfo: '<' // output / < input
   },
   controller: function() {
-
-    console.log('this is from customer charges',this.mealInfo);
-
+    // this.mealInfo = this.mealInfo;
+    // console.log('this is from customer charges',this.mealInfo.price);
+    this.mealInfo = {mealinfo};
     this.greet = "Cusotomer Charges";
     this.subTotal = this.mealInfo.price + this.mealInfo.tax
     this.total = this.subTotal + this.mealInfo.tip;
+    console.log('subTotal', this.mealInfo);
   },
   template:`
     <div class="panel panel-primary">
@@ -17,7 +18,7 @@ const customerCharges = {
       </div>
       <div class="panel-body">
         <div class="row">
-          Subtotal: $ <label for="">{{ $ctrl.subTotal  }}</label>
+          Subtotal: $ <label for="">{{ $ctrl.mealInfo.price }}</label>
         </div>
         <div class="row">
           Tip: <label for="">{{ $ctrl.mealInfo.tip }}</label>

@@ -3,11 +3,22 @@ var customerCharges = require('./component/customer-charges');
 var earningsInfo = require('./component/earnings-info');
 
 const waitstaffCalculator = {
-  controller: class waitstaffCalculatorController {
-    assignMealInfo(info) {
-      this.mealInfoDetails = info;
-      console.log('stuff:', info);
+  // controller: class waitstaffCalculatorController {
+  //   ctrl = this;
+  controller: function() {
+    const ctrl = this;
+    this.info = {};
+
+    this.assignMealInfo = function(info) {
+      ctrl.info = info;
+      // console.log('stuff:', info);
     }
+
+    this.getMealInfo = function() {
+      // console.log('this is the stuff:', ctrl.info);
+      return ctrl.info;
+    }
+
   },
   template: `
     <form name="myForm" ng-submit="$ctrl.submit()" novalidate>
@@ -18,7 +29,7 @@ const waitstaffCalculator = {
       </div>
       <div class="col-md-offset-1 col-md-4">
         <div class="row text-center">
-          <customer-charges meal-info="$ctrl.mealInfoDetails"></customer-charges>
+          <customer-charges meal-info="$ctrl.getMealInfo()"></customer-charges>
         </div>
         <div class="row text-center">
           <earnings-info></earnings-info>

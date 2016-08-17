@@ -17,11 +17,9 @@ const mealDetails = {
         tax: tax,
         tip: tip / 100
       };
-      console.log('from submit: ',ctrl.mealInfo);
       this.onSubmit({
         mealInfo: this.mealInfo
       });
-      console.log('new submit: ',ctrl.mealInfo);
     };
 
 
