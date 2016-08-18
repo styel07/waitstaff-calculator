@@ -11,7 +11,7 @@ const mealDetails = {
 
     const ctrl = this;
 
-    this.submit = function(price,tax,tip) {
+    this.submit = function() {
       ctrl.onSubmit({
         price: ctrl.price,
         tax: ctrl.tax,
@@ -19,7 +19,6 @@ const mealDetails = {
         subTotal: ctrl.price + ctrl.tax
       });
     };
-
 
     this.cancel = function() {
       ctrl.price = "";
@@ -49,7 +48,7 @@ const mealDetails = {
         Tip Percentage: % <input type="number" name="tip" ng-model="$ctrl.tip" placeholder="Tip Percentage">
       </div>
       <div class="row">
-        <button type="button" name="btn-submit" ng-click="$ctrl.submit($ctrl.price, $ctrl.tax, $ctrl.tip)">Submit</button>
+        <button type="button" name="btn-submit" ng-click="$ctrl.submit()">Submit</button>
         <button type="button" name="btn-cancel" ng-click="$ctrl.cancel()">Cancel</button>
       </div>
     </div>

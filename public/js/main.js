@@ -12,8 +12,8 @@ const waitstaffCalculator = {
 
     this.onSubmit = function(info) {
       console.log(info);
-      ctrl.info = info
-    }
+      ctrl.info = info;
+    };
 
   },
   template: `

@@ -1,13 +1,13 @@
 const customerCharges = {
   bindings: {
-    info: '<' // output / < input
+    info: '<'
   },
   controller: function() {
     this.greet = "Cusotomer Charges";
     this.subTotal = this.info.subTotal;
-    // this.total = this.info.subTotal + Number(this.info.tip);
+    this.total = this.info.subTotal + this.info.tip;
   },
-  template:`
+  template: `
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">{{$ctrl.greet}}</h3>
