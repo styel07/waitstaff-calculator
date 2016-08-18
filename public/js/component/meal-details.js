@@ -3,7 +3,7 @@ const mealDetails = {
     onSubmit: '&' //output
   },
   controller: function() {
-    this.mealInfo = {};
+    // this.mealInfo = {};
     this.greet = "Enter the Meal Details";
     this.price = 9;
     this.tax = 4;
@@ -12,13 +12,11 @@ const mealDetails = {
     const ctrl = this;
 
     this.submit = function(price,tax,tip) {
-      ctrl.mealInfo = {
-        price: price,
-        tax: tax,
-        tip: tip / 100
-      };
-      this.onSubmit({
-        mealInfo: this.mealInfo
+      ctrl.onSubmit({
+        price: ctrl.price,
+        tax: ctrl.tax,
+        tip: ctrl.tip,
+        subTotal: ctrl.price + ctrl.tax
       });
     };
 

@@ -1,15 +1,11 @@
 const customerCharges = {
   bindings: {
-    mealInfo: '<' // output / < input
+    info: '<' // output / < input
   },
   controller: function() {
-    // this.mealInfo = this.mealInfo;
-    // console.log('this is from customer charges',this.mealInfo.price);
-    this.mealInfo = {mealinfo};
     this.greet = "Cusotomer Charges";
-    this.subTotal = this.mealInfo.price + this.mealInfo.tax
-    this.total = this.subTotal + this.mealInfo.tip;
-    console.log('subTotal', this.mealInfo);
+    this.subTotal = this.info.subTotal;
+    // this.total = this.info.subTotal + Number(this.info.tip);
   },
   template:`
     <div class="panel panel-primary">
@@ -18,13 +14,13 @@ const customerCharges = {
       </div>
       <div class="panel-body">
         <div class="row">
-          Subtotal: $ <label for="">{{ $ctrl.mealInfo.price }}</label>
+          Subtotal: $ <label for="">{{ $ctrl.info.subTotal }}</label>
         </div>
         <div class="row">
-          Tip: <label for="">{{ $ctrl.mealInfo.tip }}</label>
+          Tip: <label for="">{{ $ctrl.info.tip }}</label>
         </div>
         <div class="row">
-          Total: <label for="">{{ $ctrl.total }}</label>
+          Total: <label for="">{{ $ctrl.info.subTotal + $ctrl.info.tip }}</label>
         </div>
       </div>
     </div>

@@ -1,4 +1,7 @@
 const earningsInfo = {
+  bindings: {
+    info: '<'
+  },
   controller: function() {
     this.greet = "My Earnings Info";
     this.subTotal = 0;
@@ -12,13 +15,13 @@ const earningsInfo = {
       </div>
       <div class="panel-body">
         <div class="row">
-          Subtotal: <label for="">{{$ctrl.subTotal}}</label>
+          Subtotal: <label for="">{{$ctrl.info.subTotal}}</label>
         </div>
         <div class="row">
-          Tip: <label for="">{{$ctrl.tip}}</label>
+          Tip: <label for="">{{$ctrl.info.tip}}</label>
         </div>
         <div class="row">
-          Total: <label for="">{{$ctrl.total}}</label>
+          Total: <label for="">{{$ctrl.info.total}}</label>
         </div>
       </div>
     </div>
