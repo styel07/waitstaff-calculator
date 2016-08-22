@@ -8,25 +8,6 @@ const earningsInfo = {
     ctrl.subTotal = 0;
     ctrl.tip = 0;
     ctrl.allMeals = ctrl.info;
-    ctrl.sumTip = 0;
-    ctrl.avgTip = 0;
-
-    ctrl.computeTipTotal = function() {
-      let total = ctrl.allMeals.forEach(function(meal) {
-        console.log('sum: ', meal);
-          ctrl.sumTip += meal.tip;
-      }, this);
-
-      return total;
-    };
-
-    ctrl.computeTipTotal = function() {
-      ctrl.allMeals.forEach(function(meal) {
-        console.log('sum: ', meal);
-          ctrl.sumTip += meal.tip;
-      }, this);
-      console.log('Tip Total', ctrl.sumTip);
-    };
 
   },
   template: `
@@ -36,15 +17,14 @@ const earningsInfo = {
       </div>
       <div class="panel-body">
         <div class="row">
-          Tip Total: <label for="">{{ $ctrl.sumTip }}</label>
+          Tip Total: $<label for="">{{ $ctrl.info.sumTipTotal }}</label>
         </div>
         <div class="row">
-          Meal Count: <label for="">{{ $ctrl.allMeals.length }}</label>
+          Meal Count: <label for="">{{ $ctrl.info.count }}</label>
         </div>
         <div class="row">
-          Average Tip Per Meal: <label for="">{{ $ctrl.info.subTotal + $ctrl.info.tip }}</label>
+          Average Tip Per Meal: $<label for="">{{ $ctrl.info.avgTipTotal }}</label>
         </div>
-        <button ng-click="$ctrl.computeTipTotal()">compute Tip</button>
       </div>
     </div>
   `

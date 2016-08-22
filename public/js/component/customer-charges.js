@@ -14,13 +14,13 @@ const customerCharges = {
       </div>
       <div class="panel-body">
         <div class="row">
-          Subtotal: $ <label for="">{{ $ctrl.info.subTotal }}</label>
+          Subtotal: $<label for="">{{ $ctrl.info.subTotal }}</label>
         </div>
         <div class="row">
-          Tip: <label for="">{{ $ctrl.info.tip }}</label>
+          Tip: $<label for="">{{ $ctrl.info.tip }}</label>
         </div>
         <div class="row">
-          Total: <label for="">{{ $ctrl.info.subTotal + $ctrl.info.tip }}</label>
+          Total: $<label for="">{{ $ctrl.info.subTotal + $ctrl.info.tip }}</label>
         </div>
       </div>
     </div>
