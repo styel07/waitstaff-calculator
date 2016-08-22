@@ -48,13 +48,8 @@
 	__webpack_require__(5);
 
 	__webpack_require__(12);
+
 	__webpack_require__(13);
-
-	var otherComponent = __webpack_require__(15);
-
-	// document.write("It Works");
-	// document.write(otherComponent);
-	// document.write("hello");
 
 
 /***/ },
@@ -803,55 +798,69 @@
 /* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(14);
-	const customerCharges = {
-	  bindings: {
-	    mealInfo: '<' // output / < input
-	  },
-	  controller: function() {
-
-	    console.log('this is from customer charges',this.mealInfo);
-
-	    this.greet = "Cusotomer Charges";
-	    this.tip = 0;
-	    this.mealCount = 0;
-	    this.averageTip = 0;
-	  },
-	  templateUrl:
-	  './public/view/customer-charges.html'
-	};
-
-	const earningsInfo = {
-	  controller: function() {
-	    this.greet = "My Earnings Info";
-	    this.subTotal = 0;
-	    this.tip = 0;
-	    this.total = 0;
-	  },
-	  templateUrl:
-	  './public/view/earnings-info.html'
-	};
+	var mealDetails = __webpack_require__(14);
+	var customerCharges = __webpack_require__(15);
+	var earningsInfo = __webpack_require__(16);
 
 	const waitstaffCalculator = {
-	  controller: class waitstaffCalculatorController {
-	    assignMealInfo(info) {
-	      this.mealInfoDetails = info;
-	      console.log('stuff:', info);
-	    }
+	  controller: function() {
+	    var ctrl = this;
+	    ctrl.info = {};
+	    ctrl.allMeals = [];
+	    ctrl.price = 0;
+	    ctrl.tip = 0;
+	    ctrl.tax = 0;
+	    ctrl.computedData = {};
+
+	    ctrl.onSubmit = function(info) {
+	      ctrl.info = info;
+	      ctrl.allMeals.push(info);
+	      ctrl.computeTipTotal();
+	    };
+
+	    ctrl.computeTipTotal = function() {
+	      ctrl.sumTip = 0;
+
+	      ctrl.allMeals.forEach(function(meal) {
+	        // console.log('sum: ', meal);
+	          ctrl.sumTip += meal.tip;
+	      }, this);
+
+	      ctrl.computedData = {
+	        sumTipTotal: ctrl.sumTip,
+	        count: ctrl.allMeals.length,
+	        avgTipTotal: ctrl.sumTip / ctrl.allMeals.length
+	      };
+	    };
+
+	    ctrl.reset = function() {
+	      ctrl.info = {};
+	      ctrl.allMeals = [];
+	      ctrl.price = 0;
+	      ctrl.tip = 0;
+	      ctrl.tax = 0;
+	      ctrl.sumTip = 0;
+	      ctrl.avgTip = 0;
+	      ctrl.computedData = {};
+	    };
+
 	  },
 	  template: `
 	    <form name="myForm" ng-submit="$ctrl.submit()" novalidate>
 	      <div class="col-md-offset-1 col-md-4">
 	        <div class="row text-center">
-	          <meal-details on-submit="$ctrl.assignMealInfo(mealInfo)"></meal-details>
+	          <meal-details on-submit="$ctrl.onSubmit({price: price, tax: tax, tip: tip, subTotal: subTotal})"></meal-details>
+	        </div>
+	        <div class="row">
+	          <button ng-click="$ctrl.reset()">Reset</button>
 	        </div>
 	      </div>
 	      <div class="col-md-offset-1 col-md-4">
 	        <div class="row text-center">
-	          <customer-charges meal-info="$ctrl.mealInfoDetails"></customer-charges>
+	          <customer-charges info="$ctrl.info"></customer-charges>
 	        </div>
 	        <div class="row text-center">
-	          <earnings-info></earnings-info>
+	          <earnings-info info="$ctrl.computedData"></earnings-info>
 	        </div>
 	      </div>
 	    </form>
@@ -875,26 +884,19 @@
 	    onSubmit: '&' //output
 	  },
 	  controller: function() {
-	    this.mealInfo = { price: 9, tax: 2, tip:8 };
+	    // this.mealInfo = {};
 	    this.greet = "Enter the Meal Details";
-	    this.price = 9;
-	    this.tax = 4;
-	    this.tip = 2;
 
 	    const ctrl = this;
 
-	    this.submit = function(price,tax,tip) {
-	      ctrl.mealInfo = {
-	        price: price,
-	        tax: tax,
-	        tip: tip
-	      };
-	      console.log('from submit: ',ctrl.mealInfo);
+	    this.submit = function() {
+	      ctrl.onSubmit({
+	        price: ctrl.price,
+	        tax: ctrl.tax,
+	        tip: ((ctrl.price * (ctrl.tax / 100)) + ctrl.price) * (ctrl.tip / 100),
+	        subTotal: (ctrl.price * (ctrl.tax / 100)) + ctrl.price
+	      });
 	    };
-
-	    this.onSubmit({
-	      mealInfo: ctrl.mealInfo
-	    });
 
 	    this.cancel = function() {
 	      ctrl.price = "";
@@ -924,7 +926,7 @@
 	        Tip Percentage: % <input type="number" name="tip" ng-model="$ctrl.tip" placeholder="Tip Percentage">
 	      </div>
 	      <div class="row">
-	        <button type="button" name="btn-submit" ng-click="$ctrl.submit($ctrl.price ,$ctrl.tax, $ctrl.tip)">Submit</button>
+	        <button type="button" name="btn-submit" ng-click="$ctrl.submit()">Submit</button>
 	        <button type="button" name="btn-cancel" ng-click="$ctrl.cancel()">Cancel</button>
 	      </div>
 	    </div>
@@ -932,16 +934,82 @@
 	`
 	};
 
+	module.exports = mealDetails;
+
 
 /***/ },
 /* 15 */
 /***/ function(module, exports) {
 
-	var greeting = function() {
-	  return "Hi I am from content.js.";
+	const customerCharges = {
+	  bindings: {
+	    info: '<'
+	  },
+	  controller: function() {
+	    this.greet = "Cusotomer Charges";
+	    this.subTotal = this.info.subTotal;
+	    this.total = this.info.subTotal + this.info.tip;
+	  },
+	  template: `
+	    <div class="panel panel-primary">
+	      <div class="panel-heading">
+	        <h3 class="panel-title">{{$ctrl.greet}}</h3>
+	      </div>
+	      <div class="panel-body">
+	        <div class="row">
+	          Subtotal: $<label for="">{{ $ctrl.info.subTotal }}</label>
+	        </div>
+	        <div class="row">
+	          Tip: $<label for="">{{ $ctrl.info.tip }}</label>
+	        </div>
+	        <div class="row">
+	          Total: $<label for="">{{ $ctrl.info.subTotal + $ctrl.info.tip }}</label>
+	        </div>
+	      </div>
+	    </div>
+	  `
 	};
 
-	module.exports = greeting();
+	module.exports = customerCharges;
+
+
+/***/ },
+/* 16 */
+/***/ function(module, exports) {
+
+	const earningsInfo = {
+	  bindings: {
+	    info: '<'
+	  },
+	  controller: function() {
+	    const ctrl = this;
+	    ctrl.greet = "My Earnings Info";
+	    ctrl.subTotal = 0;
+	    ctrl.tip = 0;
+	    ctrl.allMeals = ctrl.info;
+
+	  },
+	  template: `
+	    <div class="panel panel-primary">
+	      <div class="panel-heading">
+	        <h3 class="panel-title">{{$ctrl.greet}}</h3>
+	      </div>
+	      <div class="panel-body">
+	        <div class="row">
+	          Tip Total: $<label for="">{{ $ctrl.info.sumTipTotal }}</label>
+	        </div>
+	        <div class="row">
+	          Meal Count: <label for="">{{ $ctrl.info.count }}</label>
+	        </div>
+	        <div class="row">
+	          Average Tip Per Meal: $<label for="">{{ $ctrl.info.avgTipTotal }}</label>
+	        </div>
+	      </div>
+	    </div>
+	  `
+	};
+
+	module.exports = earningsInfo;
 
 
 /***/ }
